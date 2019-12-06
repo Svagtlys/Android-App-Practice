@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.LIST";
-    private ArrayList<String> values = new ArrayList<String>();
+    private ArrayList<String> values = new ArrayList<>();
     private int buttonHitCount = 0;
     private int numValuesNeeded = 26;
 
@@ -21,10 +21,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((EditText)findViewById(R.id.editText)).setHint("Enter an adjective");
+        values = new ArrayList<>();
+        buttonHitCount = 0;
+    }
+
     /** Called when the user taps the Continue button*/
     public void buttonHit(View view){
         EditText editText = findViewById(R.id.editText);
-        values.add(buttonHitCount, editText.getText().toString().toLowerCase());
+        values.add(buttonHitCount, editText.getText().toString().toLowerCase().trim());
 
 
         buttonHitCount += 1;
